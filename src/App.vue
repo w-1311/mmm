@@ -89,7 +89,9 @@
       </div>
     </div>
 
-    <!-- 中间内容  -->
+    <!-- 中间内容 组件出来的地方 router-view -->
+    <!-- 设置路由出口 -->
+    <router-view></router-view>
 
     <!-- 底部 -->
     <div class="footer">
