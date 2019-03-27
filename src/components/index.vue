@@ -614,6 +614,8 @@
 <script>
 // 导入axios 先cnpm i axios --save
 import axios from "axios";
+// 导入moment 先cnpm i moment --save
+import moment from "moment";
 
 export default {
   name: "首页",
@@ -627,6 +629,15 @@ export default {
       // 热卖数据
       toplist: [],
     };
+  },
+
+  // 过滤器
+  filters:{
+    // value 过滤的数据
+    formatTime(value){
+      //使用过滤器结合moment.js处理时间并返回 YYYY -MM -DD 是我们要格式化的格式 是固定的写法
+      return moment(value).format('YYYY-MM-DD')
+    }
   },
  
   // 钩子函数 Vue实例创建完毕，并且组件的属性都设置完毕之后触发
