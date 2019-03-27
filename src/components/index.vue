@@ -648,7 +648,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+    name:"首页",
+};
 </script>
 
 <style>

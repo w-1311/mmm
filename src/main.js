@@ -10,6 +10,7 @@ Vue.use(VueRouter)
 
 // 导入组件
 import index from './components/index.vue'
+import cart from './components/cart.vue'
 
 // 规则 名字不要写错
 let routes = [
@@ -21,6 +22,10 @@ let routes = [
     path:"/index",
     component:index
   },
+  {
+    path:"/cart",
+    component:cart
+  }
 ]
 
 //实例化路由对象
