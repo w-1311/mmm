@@ -106,7 +106,7 @@
 
 <script>
 export default {
-    name:"购物车",
+    name:"cart",
 };
 </script>
 
