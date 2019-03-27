@@ -166,11 +166,11 @@
       </div>
     </div>
     <!-- 底部的区域 -->
-    <div class="section" v-for="item in goodsList" :key="index">
+    <div class="section" v-for="item in goodsList">
       <div class="main-tit">
-        <h2>{{ item.catetitle }}</h2>
+        <h2>{{item.catetitle}}</h2>
         <p>
-          <a href="/goods/43.html" v-for="it in item.level2catelist">{{ it.subcatetitle}}</a>
+          <a href="/goods/43.html" v-for="it in item.level2catelist">{{it.subcatetitle}}</a>
           <a href="/goods/40.html">
             更多
             <i>+</i>
@@ -181,24 +181,26 @@
         <div class="wrap-box">
           <ul class="img-list">
             <li v-for="it in item.datas">
-              <a href="#/site/goodsinfo/102" class>
+              <!-- <a href="#/site/goodsinfo/87" class> -->
+              <router-link :to="'/detail/'+it.artID">
                 <div class="img-box">
                   <img :src="it.img_url">
                 </div>
                 <div class="info">
-                  <h3>{{ it.artTitle}}</h3>
+                  <h3>{{it.artTitle}}</h3>
                   <p class="price">
-                    <b>{{ it.sell_price }}</b>元
+                    <b>{{it.sell_price}}</b>元
                   </p>
                   <p>
-                    <strong>{{ it.stoxk_quantity }}</strong>
+                    <strong>库存 {{it.stock_quantity}}</strong>
                     <span>
                       市场价：
-                      <s>{{ it.market_price }}</s>
+                      <s>{{it.market_price}}</s>
                     </span>
                   </p>
                 </div>
-              </a>
+              </router-link>
+              <!-- </a> -->
             </li>
           </ul>
         </div>
