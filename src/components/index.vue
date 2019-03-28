@@ -157,7 +157,8 @@
                 </div>
                 <div class="txt-box">
                   <a href="/goods/show-98.html">{{ item.title }}</a>
-                  <span>{{ item.add_time | formatTime }}</span>
+                  <!-- 使用全局过滤器替换 -->
+                  <span>{{ item.add_time | globalFormatTime }}</span>
                 </div>
               </li>
             </ul>
@@ -216,7 +217,7 @@
 // 导入axios 先cnpm i axios --save
 // import axios from "axios";//删除axios的引入
 // 导入moment 先cnpm i moment --save
-import moment from "moment";
+// import moment from "moment";//注释moment
 
 export default {
   name: "index",
@@ -234,14 +235,14 @@ export default {
     };
   },
 
-  // 过滤器
-  filters: {
-    // value 过滤的数据
-    formatTime(value) {
-      //使用过滤器结合moment.js处理时间并返回 YYYY -MM -DD 是我们要格式化的格式 是固定的写法
-      return moment(value).format("YYYY-MM-DD");
-    }
-  },
+  // // 过滤器 //注释本地过滤器
+  // filters: {
+  //   // value 过滤的数据
+  //   formatTime(value) {
+  //     //使用过滤器结合moment.js处理时间并返回 YYYY -MM -DD 是我们要格式化的格式 是固定的写法
+  //     return moment(value).format("YYYY-MM-DD");
+  //   }
+  // },
 
   // 钩子函数 Vue实例创建完毕，并且组件的属性都设置完毕之后触发
   created() {
