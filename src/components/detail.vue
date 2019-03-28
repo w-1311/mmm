@@ -195,6 +195,7 @@
                       <!-- 设置router-link -->
                       <router-link :to="'/detail/'+item.id">{{item.title}}</router-link>
                       <!-- </a> -->
+                      <!-- 使用全局过滤器并传递参数 -->
                       <span>{{item.add_time | globalFormatTime('YYYY年MM月DD日')}}</span>
                     </div>
                   </li>
@@ -224,17 +225,35 @@ export default {
       hotgoodslist: []
     };
   },
+
+  methods: {
+    // 抽取的获取详情方法
+    getDetail() {
+      this.$axios
+        .get(`/site/goods/getgoodsinfo/${this.$route.params.id}`)
+        .then(res => {
+          // console.log(res);
+          this.goodsinfo = res.data.message.goodsinfo;
+          this.hotgoodslist = res.data.message.hotgoodslist;
+        });
+    }
+  },
+
   // 获取数据
   created() {
+    //默认调用一次
     // vuerouter自动添加到data中的 可以直接使用
-    this.$axios
-      .get(`/site/goods/getgoodsinfo/${this.$route.params.id}`)
-      .then(res => {
-        // console.log(res);
-        //保存热卖信息
-        this.goodsinfo = res.data.message.goodsinfo;
-        this.hotgoodslist = res.data.message.hotgoodslist;
-      });
+    this.getDetail();
+  },
+
+  // 侦听器 / 监听器
+  watch: {
+    // 观察数据的改变 重新获取数据
+    $route(value, oldValue) {
+      // console.log(value);
+      // 接口调用
+      this.getDetail();
+    }
   }
 };
 </script>
