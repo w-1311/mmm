@@ -127,37 +127,30 @@
                     <p
                       style="margin: 5px 0px 15px 69px; line-height: 42px; text-align: center; border: 1px solid rgb(247, 247, 247);"
                     >暂无评论，快来抢沙发吧！</p>
-                    <li>
+                    <li v-for="item in commentList">
                       <div class="avatar-box">
                         <i class="iconfont icon-user-full"></i>
                       </div>
                       <div class="inner-box">
                         <div class="info">
-                          <span>匿名用户</span>
-                          <span>2017/10/23 14:58:59</span>
+                          <span>{{item.user_name}}</span>
+                          <span>{{item.add_time | globalFormatTime('YYYY-MM-DDTHH:mm:ss')}}</span>
                         </div>
-                        <p>testtesttest</p>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="avatar-box">
-                        <i class="iconfont icon-user-full"></i>
-                      </div>
-                      <div class="inner-box">
-                        <div class="info">
-                          <span>匿名用户</span>
-                          <span>2017/10/23 14:59:36</span>
-                        </div>
-                        <p>很清晰调动单很清晰调动单</p>
+                        <p>{{item.content}}</p>
                       </div>
                     </li>
                   </ul>
                   <div class="page-box" style="margin: 5px 0px 0px 62px;">
-                    <div id="pagination" class="digg">
-                      <span class="disabled">« 上一页</span>
-                      <span class="current">1</span>
-                      <span class="disabled">下一页 »</span>
-                    </div>
+                    <!-- 使用饿了么ui的分页组件替换 -->
+                    <el-pagination
+                      @size-change="handleSizeChange"
+                      @current-change="handleCurrentChange"
+                      :current-page="pageIndex"
+                      :page-sizes="[5,10,15,20]"
+                      :page-size="pageSize"
+                      layout="total, sizes, prev, pager, next, jumper"
+                      :total="totalcount"
+                    ></el-pagination>
                   </div>
                 </div>
               </div>
@@ -217,7 +210,15 @@ export default {
       // 图片数组
       imglist: [],
       // 输入的评论内容
-      comment: ""
+      comment: "",
+      // 页码
+      pageIndex: 1,
+      // 页容量
+      pageSize: 10,
+      // 总条数
+      totalcount: 0,
+      // 评论数组
+      commentList: []
     };
   },
 
@@ -258,6 +259,33 @@ export default {
             }
           });
       }
+    },
+    // 获取评论的方法
+    getComments() {
+      this.$axios
+        .get(
+          `site/comment/getbypage/goods/${this.$route.params.id}?pageIndex=${
+            this.pageIndex
+          }&pageSize=${this.pageSize}`
+        )
+        .then(res => {
+          // console.log(res);
+          this.totalcount = res.data.totalcount;
+          this.commentList = res.data.message;
+        });
+    },
+    // 页容量改变
+    handleSizeChange(size) {
+      // console.log(size);
+      this.pageSize = size;
+      // 重新获取数据
+      this.getComments();
+    },
+    // 页码改变
+    handleCurrentChange(current) {
+      // console.log(current);
+      this.pageIndex = current;
+      this.getComments();
     }
   },
 
@@ -266,6 +294,8 @@ export default {
     //默认调用一次
     // vuerouter自动添加到data中的 可以直接使用
     this.getDetail();
+    // 获取评论
+    this.getComments();
   },
 
   // 侦听器 / 监听器
