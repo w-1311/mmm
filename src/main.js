@@ -1,7 +1,15 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-// 全局内容在这 包含样式
+// 饿了吗ui导入
+// 导入模块 安装饿了么ui : cnpm i element-ui --save
+import ElementUI from 'element-ui';
+// 导入样式
+import 'element-ui/lib/theme-chalk/index.css';
+// vue插件
+Vue.use(ElementUI);
+
+// 全局引入样式
 import  './assets/statics/site/css/style.css'
 
 // 统一设置axios
