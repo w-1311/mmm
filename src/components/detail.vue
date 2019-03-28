@@ -106,6 +106,7 @@
                           sucmsg=" "
                           data-type="*10-1000"
                           nullmsg="请填写评论内容！"
+                          v-model="comment"
                         ></textarea>
                         <span class="Validform_checktip"></span>
                       </div>
@@ -116,6 +117,7 @@
                           type="submit"
                           value="提交评论"
                           class="submit"
+                          @click="postComment"
                         >
                         <span class="Validform_checktip"></span>
                       </div>
@@ -213,7 +215,9 @@ export default {
       // 计数器绑定的个数
       num1: 1,
       // 图片数组
-      imglist: []
+      imglist: [],
+      // 输入的评论内容
+      comment: ""
     };
   },
 
@@ -233,6 +237,27 @@ export default {
     // 计数器的事件  计算器绑定的方法
     handleChange() {
       console.log("我变了");
+    },
+
+    // 发表评论
+    postComment() {
+      if (this.comment === "") {
+        this.$message.error("哥们，写点东西呗！");
+      } else {
+        // 接口调用
+        this.$axios
+          .post(`site/validate/comment/post/goods/${this.$route.params.id}`, {
+            commenttxt: this.comment
+          })
+          .then(res => {
+            // console.log(res);
+            if (res.data.status === 0) {
+              this.$message.success(res.data.message);
+              // 本地清空
+              this.comment = "";
+            }
+          });
+      }
     }
   },
 
