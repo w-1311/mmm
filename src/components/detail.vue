@@ -13,7 +13,15 @@
         <div class="wrap-box">
           <div class="left-925">
             <div class="goods-box clearfix">
-              <div class="pic-box"></div>
+              <div class="pic-box">
+                <!-- 设置轮播图 -->
+                <el-carousel>
+                  <el-carousel-item v-for="(item,index) in imglist" :key="index">
+                    <!-- <h3>{{ item }}</h3> -->
+                    <img :src="item.thumb_path" alt>
+                  </el-carousel-item>
+                </el-carousel>
+              </div>
               <div class="goods-spec">
                 <h1>{{goodsinfo.title}}</h1>
                 <p class="subtitle">{{goodsinfo.sub_title}}</p>
@@ -203,7 +211,9 @@ export default {
       // 热卖商品
       hotgoodslist: [],
       // 计数器绑定的个数
-      num1: 1
+      num1: 1,
+      // 图片数组
+      imglist: []
     };
   },
 
@@ -216,6 +226,8 @@ export default {
           // console.log(res);
           this.goodsinfo = res.data.message.goodsinfo;
           this.hotgoodslist = res.data.message.hotgoodslist;
+          // 商品图片
+          this.imglist = res.data.message.imglist;
         });
     },
     // 计数器的事件  计算器绑定的方法
@@ -244,4 +256,21 @@ export default {
 </script>
 
 <style>
+.pic-box {
+  width: 395px;
+  height: 320px;
+}
+.pic-box .el-carousel {
+  width: 100%;
+  height: 100%;
+}
+.pic-box .el-carousel__container {
+  width: 100%;
+  height: 100%;
+}
+.pic-box .el-carousel__container img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 </style>

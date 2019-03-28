@@ -56,6 +56,8 @@ let routes = [
     path:"/cart",
     component:cart
   },
+  // 详情组件 需要根据不同的商品 显示不同的结果
+  // 携带了id过去
   {
     path: '/detail/:id',
     component: detail
