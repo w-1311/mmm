@@ -166,10 +166,12 @@
       </div>
     </div>
     <!-- 底部的区域 -->
+    <!--eslint-disable-next-line-->
     <div class="section" v-for="item in goodsList">
       <div class="main-tit">
         <h2>{{item.catetitle}}</h2>
         <p>
+          <!--eslint-disable-next-line-->
           <a href="/goods/43.html" v-for="it in item.level2catelist">{{it.subcatetitle}}</a>
           <a href="/goods/40.html">
             更多
@@ -180,6 +182,7 @@
       <div class="wrapper clearfix">
         <div class="wrap-box">
           <ul class="img-list">
+            <!--eslint-disable-next-line-->
             <li v-for="it in item.datas">
               <!-- <a href="#/site/goodsinfo/87" class> -->
               <router-link :to="'/detail/'+it.artID">
@@ -211,7 +214,7 @@
 
 <script>
 // 导入axios 先cnpm i axios --save
-import axios from "axios";
+// import axios from "axios";//删除axios的引入
 // 导入moment 先cnpm i moment --save
 import moment from "moment";
 
@@ -244,7 +247,7 @@ export default {
   created() {
     //钩子函数中  获取数据
     // 顶部数据
-    axios
+    this.$axios //使用this.$axios来访问,不用写基地址
       .get("http://111.230.232.110:8899/site/goods/gettopdata/goods")
       .then(res => {
         // console.log(res);
@@ -255,7 +258,7 @@ export default {
       });
 
     // 底部数据
-    axios
+    this.$axios //使用this.$axios来访问,不用写基地址
       .get("http://111.230.232.110:8899/site/goods/getgoodsgroup")
       .then(res => {
         //   console.log(res);
