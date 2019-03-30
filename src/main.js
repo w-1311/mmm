@@ -33,46 +33,16 @@ Vue.filter('globalFormatTime', function(value,fmtTemplate){
   }
 })
 
-// 路由相关  导入路由
-import VueRouter from 'vue-router'
-Vue.use(VueRouter)
-
-// 导入组件
-import index from './components/index.vue'
-import cart from './components/cart.vue'
-import detail from './components/detail.vue'
-
-// 规则 名字不要写错
-let routes = [
-  {
-    path:"/",
-    component:index
-  },
-  {
-    path:"/index",
-    component:index
-  },
-  {
-    path:"/cart",
-    component:cart
-  },
-  // 详情组件 需要根据不同的商品 显示不同的结果
-  // 携带了id过去
-  {
-    path: '/detail/:id',
-    component: detail
-  }
-]
-
-//实例化路由对象
-let router = new VueRouter({
-  routes
-})
-
 Vue.config.productionTip = false
+
+// 导入抽取的路由
+import router from './router.js'
+// console.log(router)
 
 new Vue({
   render: h => h(App),
   // 挂载到顶级Vue实例上  设置到顶级Vue实例上
   router
+   // 下面的写法是  暴露时包裹 了对象的写法
+  // router: router.router
 }).$mount('#app')

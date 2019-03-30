@@ -256,6 +256,9 @@ export default {
               this.$message.success(res.data.message);
               // 本地清空
               this.comment = "";
+               // 重新获取评论即可
+              this.pageIndex = 1;
+              this.getComments()
             }
           });
       }

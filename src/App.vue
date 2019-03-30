@@ -18,12 +18,14 @@
               <strong>|</strong>
             </span>
             <span>
-              <a href class>会员中心</a>
+              <!-- <a href class> -->
+              <router-link to="/user">会员中心</router-link>
+              <!-- </a> -->
               <strong>|</strong>
               <a>退出</a>
               <strong>|</strong>
             </span>
-           <!-- <a href class> -->
+            <!-- <a href class> -->
 
             <router-link to="/cart">
               <i class="iconfont icon-cart"></i>购物车(
@@ -43,12 +45,12 @@
           <div id="menu2" class="nav-box menuhd">
             <ul>
               <li class="index">
-                 <!-- <a href="#" class> -->
+                <!-- <a href="#" class> -->
 
-                  <router-link to="/index">
-                    <span class="out" style="top: 0px;">首页</span>
-                  </router-link>
-                  
+                <router-link to="/index">
+                  <span class="out" style="top: 0px;">首页</span>
+                </router-link>
+
                 <!-- </a> -->
               </li>
               <li class="news">
@@ -138,7 +140,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "app"
+};
 </script>
 
 <style>
